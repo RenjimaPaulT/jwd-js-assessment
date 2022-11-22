@@ -19,6 +19,7 @@
       5. Add a countdown timer - when the time is up, end the quiz, display the score and highlight the correct answers
 *************************** */
 
+
 window.addEventListener('DOMContentLoaded', () => {
   const start = document.querySelector('#start');
   start.addEventListener('click', function (e) {
@@ -44,6 +45,16 @@ window.addEventListener('DOMContentLoaded', () => {
       o: ['Sydney', 'Canberra', 'Melbourne', 'Perth'],
       a: 1,
     },
+    {
+      q: 'Which animal known as ship of desert',
+      o: ['Horse', 'Camel', 'Donkey', 'Goat'],
+      a: 2,
+    },
+    {
+      q: 'Which is the biggest planet',
+      o: ['Earth', 'Mercury', 'Saturn', 'Jupiter'],
+      a: 3,
+    },
   ];
 
   // function to Display the quiz questions and answers from the object
@@ -62,6 +73,15 @@ window.addEventListener('DOMContentLoaded', () => {
       quizWrap.innerHTML = quizDisplay;
     });
   };
+  setInterval(myfunction, 1000);
+
+function myfunction() {
+  let d = new Date();
+  document.getElementById("time").innerHTML=
+  d.getHours() + ":" +
+  d.getMinutes() + ":" +
+  d.getSeconds();
+}
 
   // Calculate the score
   const calculateScore = () => {
@@ -71,20 +91,29 @@ window.addEventListener('DOMContentLoaded', () => {
         //highlight the li if it is the correct answer
         let li = `li_${index}_${i}`;
         let r = `radio_${index}_${i}`;
+        //console.log(li);
         liElement = document.querySelector('#' + li);
         radioElement = document.querySelector('#' + r);
-
+        //console.log(liElement);
         if (quizItem.a == i) {
           //change background color of li element here
+          radioElement.addEventListener("click", changecolor());
+          function changecolor()
+          {
+            liElement.style.changecolor ="yellow"; 
+             }
         }
-
-        if (radioElement.checked) {
+             if (radioElement.checked) {
           // code for task 1 goes here
+          score++;
         }
+      console.log("score: "+score);
       }
     });
   };
 
   // call the displayQuiz function
   displayQuiz();
+  
+ 
 });
